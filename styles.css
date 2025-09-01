@@ -13,7 +13,7 @@
     /* Позиционирование изображения */
     --image-width: 142px;
     --image-height: 213px;
-    --image-top: 261px;
+    --image-top: 320px;
     --image-left: 166px;
     
     /* Шрифты */
@@ -201,5 +201,6 @@ body {
     
     .auth-card__image-element {
         transform: translate(-50%, -50%);
+        top: 70% !important;
     }
 }
