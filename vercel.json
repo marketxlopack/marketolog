@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "public": true,
   "builds": [
-    { "src": "mpc test/index.html", "use": "@vercel/static" }
+    { "src": "index.html", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "mpc test/index.html" }
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
