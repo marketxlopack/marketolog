@@ -22,7 +22,15 @@
             <div class="auth-card__content">
                 <h1 class="auth-card__title">Авторизация</h1>
                 <p class="auth-card__subtitle">Войти с помощью</p>
-                <h2 class="auth-card__telegram-text">TELEGRAM</h2>
+
+                <!-- Кнопка авторизации Telegram -->
+                <script async src="https://telegram.org/js/telegram-widget.js?22"
+                        data-telegram-login="HlopetzMarketbot"
+                        data-size="large"
+                        data-auth-url="http://localhost:3000/auth/telegram"
+                        data-request-access="write">
+                </script>
+
                 <p class="auth-card__description">«Безопасная авторизация через Telegram»</p>
             </div>
         </div>
