@@ -1,39 +1,58 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Авторизация через Telegram</title>
-    <!-- Подключаем CSS через абсолютный путь -->
-    <link rel="stylesheet" href="/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Авторизация через Telegram</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
+
+  <!-- Подключаем WebApp JS -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <div class="auth-container">
-        <div class="auth-card">
-            <div class="auth-card__background">
-                <div class="auth-card__image">
-                    <!-- Абсолютный путь к картинке -->
-                    <img src="/images/norm-1.png" alt="Фоновое изображение" class="auth-card__image-element">
-                </div>
-                <div class="auth-card__overlay"></div>
-            </div>
-            
-            <div class="auth-card__content">
-                <h1 class="auth-card__title">Авторизация</h1>
-                <p class="auth-card__subtitle">Войти с помощью</p>
-
-                <!-- Кнопка авторизации Telegram -->
-                <script async src="https://telegram.org/js/telegram-widget.js?22"
-                        data-telegram-login="HlopetzMarketbot"
-                        data-size="large"
-                        data-auth-url="http://localhost:3000/auth/telegram"
-                        data-request-access="write">
-                </script>
-
-                <p class="auth-card__description">«Безопасная авторизация через Telegram»</p>
-            </div>
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-card__background">
+        <div class="auth-card__image">
+          <img src="/images/norm-1.png" alt="Фоновое изображение" class="auth-card__image-element">
         </div>
+        <div class="auth-card__overlay"></div>
+      </div>
+      
+      <div class="auth-card__content">
+        <h1 class="auth-card__title">Авторизация</h1>
+        <p class="auth-card__subtitle">Войти с помощью</p>
+
+        <!-- Кнопка -->
+        <button id="loginBtn" class="auth-btn">TELEGRAM</button>
+
+        <p class="auth-card__description">«Безопасная авторизация через Telegram»</p>
+      </div>
     </div>
+  </div>
+
+  <script>
+    let tg = window.Telegram.WebApp;
+
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      tg.expand();
+      let user = tg.initDataUnsafe?.user;
+
+      if (user) {
+        document.body.innerHTML = `
+          <div style="text-align:center; font-family:Montserrat, sans-serif; margin-top:50px;">
+            <h2>Привет, ${user.first_name} ${user.last_name || ""}</h2>
+            <p>@${user.username || "без ника"}</p>
+            <img src="https://t.me/i/userpic/320/${user.id}.jpg" 
+                 alt="avatar" 
+                 style="border-radius:50%; width:120px; height:120px; margin-top:20px;">
+          </div>
+        `;
+      } else {
+        alert("Не удалось получить данные пользователя 😢");
+      }
+    });
+  </script>
 </body>
 </html>
