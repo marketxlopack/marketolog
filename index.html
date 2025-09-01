@@ -33,20 +33,24 @@
   </div>
 
   <script>
-    let tg = window.Telegram.WebApp;
+    const tg = window.Telegram.WebApp;
+    tg.expand(); // расширяем сразу
+
+    const user = tg.initDataUnsafe?.user;
 
     document.getElementById("loginBtn").addEventListener("click", () => {
-      tg.expand();
-      let user = tg.initDataUnsafe?.user;
-
       if (user) {
         document.body.innerHTML = `
-          <div style="text-align:center; font-family:Montserrat, sans-serif; margin-top:50px;">
+          <div style="text-align:center; font-family:Montserrat, sans-serif; margin-top:50px; color:white;">
             <h2>Привет, ${user.first_name} ${user.last_name || ""}</h2>
             <p>@${user.username || "без ника"}</p>
-            <img src="https://t.me/i/userpic/320/${user.id}.jpg" 
-                 alt="avatar" 
-                 style="border-radius:50%; width:120px; height:120px; margin-top:20px;">
+            ${
+              user.username 
+              ? `<img src="https://t.me/i/userpic/320/${user.username}.jpg" 
+                     alt="avatar" 
+                     style="border-radius:50%; width:120px; height:120px; margin-top:20px;">`
+              : `<p>Аватарка недоступна</p>`
+            }
           </div>
         `;
       } else {
